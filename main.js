@@ -9,8 +9,9 @@ document.getElementById('model3').addEventListener('click', () => loadModel('ass
 const arButton = ARButton.createButton(renderer, {
     requiredFeatures: ['hit-test'],
     optionalFeatures: ['dom-overlay'],
-    domOverlay: { root: document.body } // DOM要素をオーバーレイとして使用
+    domOverlay: { root: document.getElementById('overlay') } // 例としてidが'overlay'の要素を指定
   });
+  
 
 let currentModel = null; // 現在のモデルを追跡
 
