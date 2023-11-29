@@ -2,9 +2,9 @@ import * as THREE from './libs/three.js-r132/build/three.module.js';
 import { GLTFLoader } from './libs/three.js-r132/examples/jsm/loaders/GLTFLoader.js';
 import { ARButton } from './libs/three.js-r132/examples/jsm/webxr/ARButton.js';
 
-document.getElementById('model1').addEventListener('click', () => loadModel('assets//models/sakana.gltf'));
-document.getElementById('model2').addEventListener('click', () => loadModel('assets//models/tori.gltf'));
-document.getElementById('model3').addEventListener('click', () => loadModel('assets//models/usi4.gltf'));
+document.getElementById('model1').addEventListener('click', () => loadModel('assets/models/sakana.gltf'));
+document.getElementById('model2').addEventListener('click', () => loadModel('assets/models/tori.gltf'));
+document.getElementById('model3').addEventListener('click', () => loadModel('assets/models/usi4.gltf'));
 
 let currentModel = null; // 現在のモデルを追跡
 
