@@ -6,6 +6,12 @@ document.getElementById('model1').addEventListener('click', () => loadModel('ass
 document.getElementById('model2').addEventListener('click', () => loadModel('assets/models/tori.gltf'));
 document.getElementById('model3').addEventListener('click', () => loadModel('assets/models/usi4.gltf'));
 
+const arButton = ARButton.createButton(renderer, {
+    requiredFeatures: ['hit-test'],
+    optionalFeatures: ['dom-overlay'],
+    domOverlay: { root: document.body } // DOM要素をオーバーレイとして使用
+  });
+
 let currentModel = null; // 現在のモデルを追跡
 
 function loadModel(path) {
