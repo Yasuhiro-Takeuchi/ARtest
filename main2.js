@@ -1,5 +1,4 @@
 import * as THREE from './libs/three.js-r132/build/three.module.js';
-import { GLTFLoader } from './libs/three.js-r132/examples/jsm/loaders/GLTFLoader.js';
 import { ARButton } from './libs/three.js-r132/examples/jsm/webxr/ARButton.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,24 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.xr.enabled = true;
 
-    const arButton = ARButton.createButton(renderer, {
-      requiredFeatures: ['hit-test'],
-      optionalFeatures: ['dom-overlay'],
-      domOverlay: { root: document.body }
-    });
+    const arButton = ARButton.createButton(renderer, { requiredFeatures: ['hit-test'], optionalFeatures: ['dom-overlay'], domOverlay: { root: document.body } });
     document.body.appendChild(renderer.domElement);
     document.body.appendChild(arButton);
 
     const controller = renderer.xr.getController(0);
     scene.add(controller);
-
-    const loader = new GLTFLoader();
     controller.addEventListener('select', () => {
-      loader.load('assets/models/sakana.gltf', (gltf) => {
-        gltf.scene.position.setFromMatrixPosition(reticle.matrix);
-        gltf.scene.scale.set(0.1, 0.1, 0.1); // サイズ調整
-        scene.add(gltf.scene);
-      });
+      const geometry = new THREE.BoxGeometry(0.06, 0.06, 0.06);
+      const material = new THREE.MeshBasicMaterial({ color: 0xffffff * Math.random() });
+      const mesh = new THREE.Mesh(geometry, material);
+      mesh.position.setFromMatrixPosition(reticle.matrix);
+      mesh.scale.y = Math.random() * 2 + 1;
+      scene.add(mesh);
     });
 
     renderer.xr.addEventListener("sessionstart", async (e) => {
@@ -54,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (hitTestResults.length) {
           const hit = hitTestResults[0];
-          const referenceSpace = renderer.xr.getReferenceSpace();
+          const referenceSpace = renderer.xr.getReferenceSpace(); // ARButton requested 'local' reference space
           const hitPose = hit.getPose(referenceSpace);
 
           reticle.visible = true;
@@ -70,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer.xr.addEventListener("sessionend", () => {
       console.log("session end");
     });
+
   }
 
   initialize();
