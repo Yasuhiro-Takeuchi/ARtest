@@ -5,7 +5,7 @@ import { ARButton } from './libs/three.js-r132/examples/jsm/webxr/ARButton.js';
 document.addEventListener('DOMContentLoaded', () => {
   const initialize = async () => {
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera();
+    const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 20);
 
     const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
     scene.add(light);
@@ -34,12 +34,29 @@ document.addEventListener('DOMContentLoaded', () => {
     scene.add(controller);
 
     const loader = new GLTFLoader();
+
+    // タップカウンター
+    let tapCount = 0;
+
+    // モデルデータとスケールを含むオブジェクトの配列
+    const models = [
+      { path: 'assets/models/model1.gltf', scale: 0.01 },
+      { path: 'assets/models/model2.gltf', scale: 0.02 },
+      // 他のモデルも同様に追加
+    ];
+
     controller.addEventListener('select', () => {
-      loader.load('assets/models/sakana.gltf', (gltf) => {
+      // 現在のタップ数に応じたモデルを取得
+      const modelData = models[tapCount % models.length];
+
+      loader.load(modelData.path, (gltf) => {
         gltf.scene.position.setFromMatrixPosition(reticle.matrix);
-        gltf.scene.scale.set(0.1, 0.1, 0.1); // サイズ調整
+        gltf.scene.scale.set(modelData.scale, modelData.scale, modelData.scale); // モデルごとのスケールで調整
         scene.add(gltf.scene);
       });
+
+      // タップカウントを増やす
+      tapCount++;
     });
 
     renderer.xr.addEventListener("sessionstart", async (e) => {
