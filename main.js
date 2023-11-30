@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const models = [
       { path: 'assets/models/sakana.gltf', scale: 0.01 },
       { path: 'assets/models/tori.gltf', scale: 0.02 },
+      { path: 'assets/models/usi4.gltf', scale: 0.02 },
       // 他のモデルも同様に追加
     ];
 
