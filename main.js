@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // モデルデータとスケールを含むオブジェクトの配列
     const models = [
-      { path: 'assets/models/gomibako.gltf', scale: 0.01 },
-      { path: 'assets/models/cardbox.gltf', scale: 0.02 },
-      { path: 'assets/models/usi4.gltf', scale: 0.02 },
+      { path: 'assets/models/gomibako.gltf', scale: 0.001 },
+      { path: 'assets/models/cardbox.gltf', scale: 0.002 },
+      { path: 'assets/models/usi4.gltf', scale: 0.002 },
       // 他のモデルも同様に追加
     ];
 
