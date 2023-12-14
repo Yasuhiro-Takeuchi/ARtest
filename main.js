@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
     scene.add(light);
 
-    const reticleGeometry = new THREE.RingGeometry(0.15, 0.2, 32).rotateX(- Math.PI / 2);
+    const reticleGeometry = new THREE.RingGeometry(0.015, 0.02, 32).rotateX(- Math.PI / 2);
     const reticleMaterial = new THREE.MeshBasicMaterial();
     const reticle = new THREE.Mesh(reticleGeometry, reticleMaterial);
     reticle.matrixAutoUpdate = false;
@@ -40,9 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // モデルデータとスケールを含むオブジェクトの配列
     const models = [
-      { path: 'assets/models/gomibako.gltf', scale: 0.001 },
-      { path: 'assets/models/cardbox.gltf', scale: 0.002 },
-      { path: 'assets/models/usi4.gltf', scale: 0.002 },
+      { path: 'assets/models/tram.gltf', scale: 0.02 },
+      // { path: 'assets/models/gomibako.gltf', scale: 0.001 },
+      // { path: 'assets/models/cardbox.gltf', scale: 0.002 },
+      // { path: 'assets/models/usi4.gltf', scale: 0.002 },
       // 他のモデルも同様に追加
     ];
 
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
       loader.load(modelData.path, (gltf) => {
         gltf.scene.position.setFromMatrixPosition(reticle.matrix);
         gltf.scene.scale.set(modelData.scale, modelData.scale, modelData.scale); // モデルごとのスケールで調整
-        scene.add(gltf.scene);
+        scwene.add(gltf.scene);
       });
 
       // タップカウントを増やす
